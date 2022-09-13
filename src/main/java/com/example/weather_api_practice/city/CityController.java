@@ -24,4 +24,5 @@ public class CityController {
     public City postCity(@PathVariable String city) {
         return cityService.postCity(city);
     }
+
 }

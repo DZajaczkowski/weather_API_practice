@@ -4,6 +4,8 @@ import com.example.weather_api_practice.weather.WeatherClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class CityService {
@@ -35,7 +37,7 @@ public class CityService {
         return cityRepository.countAllByCountry(country);
     }
 
-    public City[] getCitiesByCountry(String country) {
+    public List<City> getCitiesByCountry(String country) {
         return cityRepository.getCitiesByCountry(country);
     }
 
