@@ -19,8 +19,7 @@ public class Weather {
 
     @Id
     private int id;
-    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(referencedColumnName = "name")
+    @OneToOne(cascade = CascadeType.PERSIST)
     private City city;
     private double lon;
     private double lat;

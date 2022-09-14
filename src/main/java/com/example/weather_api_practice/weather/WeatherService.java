@@ -76,7 +76,8 @@ public class WeatherService {
     }
 
     public void deleteWeatherForCity(String c) {
-        weatherRepository.delete(getWeatherForCity(c));
+        Weather weather = getWeatherForCity(c);
+        weatherRepository.delete(weather);
     }
 
 }

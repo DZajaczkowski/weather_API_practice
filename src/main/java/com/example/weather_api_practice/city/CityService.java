@@ -41,6 +41,10 @@ public class CityService {
         return cityRepository.getCitiesByCountry(country);
     }
 
+    public void deleteCity(String city) {
+        cityRepository.delete(getCity(city));
+    }
+
     public City convertCityDataToCity(CityData cityData) {
         return new City(cityData);
     }

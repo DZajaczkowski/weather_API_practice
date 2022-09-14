@@ -1,6 +1,7 @@
 package com.example.weather_api_practice.city;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -23,6 +24,12 @@ public class CityController {
     @PostMapping("/save/{city}")
     public City postCity(@PathVariable String city) {
         return cityService.postCity(city);
+    }
+
+    @DeleteMapping("/delete/{city}")
+    public HttpStatus deleteCity(@PathVariable String city) {
+        cityService.deleteCity(city);
+        return HttpStatus.OK;
     }
 
 }
