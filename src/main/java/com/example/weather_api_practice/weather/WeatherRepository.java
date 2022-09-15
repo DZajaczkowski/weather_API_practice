@@ -10,10 +10,15 @@ import java.util.List;
 public interface WeatherRepository extends JpaRepository<Weather, Integer> {
 
     List<Weather> getWeathersByCity_Country(String country);
+
     Weather getWeatherByCity(City city);
+
     Weather getWeatherByCity_Name(String city);
+
     boolean existsWeatherByCity(City city);
+
     boolean existsWeatherByCity_Name(String city);
+
     boolean existsWeatherByCity_Country(String country);
 
 }

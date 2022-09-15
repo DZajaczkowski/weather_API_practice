@@ -22,14 +22,14 @@ public class WeatherService {
 
     public Weather getWeatherForCity(String cityName) {
         cityName = cityName.toLowerCase(Locale.ROOT);
-        if(!weatherRepository.existsWeatherByCity_Name(cityName))
+        if (!weatherRepository.existsWeatherByCity_Name(cityName))
             throw new WeatherNotFoundException();
         return weatherRepository.getWeatherByCity_Name(cityName);
     }
 
     public Weather postWeatherForCity(String cityName) {
         cityName = cityName.toLowerCase(Locale.ROOT);
-        if(weatherRepository.existsWeatherByCity_Name(cityName))
+        if (weatherRepository.existsWeatherByCity_Name(cityName))
             throw new WeatherAlreadyExistsException();
         City city = cityService.getCity(cityName);
         var weatherResponseBody = weatherClient.getWeatherData(city);
@@ -64,7 +64,7 @@ public class WeatherService {
     public Weather updateWeatherForCity(String cityName) {
         cityName = cityName.toLowerCase(Locale.ROOT);
         City city = cityService.getCity(cityName);
-        if(!weatherRepository.existsWeatherByCity_Name(cityName))
+        if (!weatherRepository.existsWeatherByCity_Name(cityName))
             postWeatherForCity(cityName);
         Weather weather = weatherRepository.getWeatherByCity(city);
         weather = setUpdatedValues(city, weather);

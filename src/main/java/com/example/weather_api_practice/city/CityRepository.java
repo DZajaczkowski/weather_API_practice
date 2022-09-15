@@ -10,8 +10,11 @@ import java.util.UUID;
 public interface CityRepository extends JpaRepository<City, UUID> {
 
     boolean existsCityByName(String c);
+
     City getCityByName(String c);
+
     int countAllByCountry(String country);
+
     List<City> getCitiesByCountry(String country);
 
 }

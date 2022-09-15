@@ -19,14 +19,14 @@ public class CityService {
 
     public City getCity(String cityName) {
         cityName = cityName.toLowerCase(Locale.ROOT);
-        if(cityRepository.existsCityByName(cityName))
+        if (cityRepository.existsCityByName(cityName))
             return cityRepository.getCityByName(cityName);
         else throw new CityNotFoundException();
     }
 
     public City createCity(String cityName) {
         cityName = cityName.toLowerCase(Locale.ROOT);
-        if(cityRepository.existsCityByName(cityName))
+        if (cityRepository.existsCityByName(cityName))
             throw new CityAlreadyExistsException();
         var cityDataArray = weatherClient.getCityData(cityName).getBody();
         if (cityDataArray == null)
