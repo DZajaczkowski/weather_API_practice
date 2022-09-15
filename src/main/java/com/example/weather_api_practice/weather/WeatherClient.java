@@ -16,10 +16,10 @@ public class WeatherClient {
 
     private final RestTemplate restTemplate;
 
-    public ResponseEntity<CityData[]> getCityData(String city) {
+    public ResponseEntity<CityData[]> getCityData(String cityName) {
         String currentCoordinates
                 = "https://api.openweathermap.org/geo/1.0/direct?q={city}&limit=1&appid=55832a1dadee8a9132e71d5acf5821a7";
-        return restTemplate.getForEntity(currentCoordinates, CityData[].class, city);
+        return restTemplate.getForEntity(currentCoordinates, CityData[].class, cityName);
     }
 
     public ResponseEntity<WeatherData> getWeatherData(City city) {

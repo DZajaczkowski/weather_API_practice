@@ -14,5 +14,4 @@ public class CityData {
     public double lat;
     String country;
 
-
 }

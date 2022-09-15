@@ -37,5 +37,4 @@ public class Weather {
         this.humidity = weatherData.main.humidity;
     }
 
-
 }

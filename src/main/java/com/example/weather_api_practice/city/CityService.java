@@ -17,38 +17,39 @@ public class CityService {
     private final CityRepository cityRepository;
 
 
-    public City getCity(String c) {
-        c = c.toLowerCase(Locale.ROOT);
-        if(cityRepository.existsCityByName(c))
-            return cityRepository.getCityByName(c);
+    public City getCity(String cityName) {
+        cityName = cityName.toLowerCase(Locale.ROOT);
+        if(cityRepository.existsCityByName(cityName))
+            return cityRepository.getCityByName(cityName);
         else throw new CityNotFoundException();
     }
 
-    public City createCity(String c) {
-        c = c.toLowerCase(Locale.ROOT);
-        if(cityRepository.existsCityByName(c))
+    public City createCity(String cityName) {
+        cityName = cityName.toLowerCase(Locale.ROOT);
+        if(cityRepository.existsCityByName(cityName))
             throw new CityAlreadyExistsException();
-        var cityDataArray = weatherClient.getCityData(c).getBody();
+        var cityDataArray = weatherClient.getCityData(cityName).getBody();
         if (cityDataArray == null)
             throw new CityNotFoundException();
         var city = convertCityDataToCity(cityDataArray[0]);
         return cityRepository.save(city);
     }
 
-    public int countByCountry(String country) {
-        country = country.toUpperCase();
-        return cityRepository.countAllByCountry(country);
+    public int countByCountry(String countryName) {
+        countryName = countryName.toUpperCase();
+        return cityRepository.countAllByCountry(countryName);
     }
 
-    public List<City> getCitiesByCountry(String country) {
-        return cityRepository.getCitiesByCountry(country);
+    public List<City> getCitiesByCountry(String countryName) {
+        return cityRepository.getCitiesByCountry(countryName);
     }
 
-    public void deleteCity(String city) {
-        cityRepository.delete(getCity(city));
+    public void deleteCity(String cityName) {
+        cityRepository.delete(getCity(cityName));
     }
 
     public City convertCityDataToCity(CityData cityData) {
         return new City(cityData);
     }
+
 }

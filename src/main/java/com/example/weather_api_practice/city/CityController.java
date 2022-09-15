@@ -11,24 +11,24 @@ public class CityController {
 
     private final CityService cityService;
 
-    @GetMapping("/{city}")
-    public City getCity(@PathVariable String city) {
-        return cityService.getCity(city);
+    @GetMapping("/{cityName}")
+    public City getCity(@PathVariable String cityName) {
+        return cityService.getCity(cityName);
     }
 
-    @GetMapping("/count/{country}")
-    public int getCountOfCitiesByCountry(@PathVariable String country) {
-        return cityService.countByCountry(country);
+    @GetMapping("/count/{countryName}")
+    public int getCountOfCitiesByCountry(@PathVariable String countryName) {
+        return cityService.countByCountry(countryName);
     }
 
-    @PostMapping("/save/{city}")
-    public City createCity(@PathVariable String city) {
-        return cityService.createCity(city);
+    @PostMapping("/save/{cityName}")
+    public City createCity(@PathVariable String cityName) {
+        return cityService.createCity(cityName);
     }
 
-    @DeleteMapping("/delete/{city}")
-    public HttpStatus deleteCity(@PathVariable String city) {
-        cityService.deleteCity(city);
+    @DeleteMapping("/delete/{cityName}")
+    public HttpStatus deleteCity(@PathVariable String cityName) {
+        cityService.deleteCity(cityName);
         return HttpStatus.OK;
     }
 

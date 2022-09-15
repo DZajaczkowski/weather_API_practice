@@ -10,4 +10,5 @@ public class CityAlreadyExistsException extends RuntimeException {
     public CityAlreadyExistsException() {
         super();
     }
+
 }

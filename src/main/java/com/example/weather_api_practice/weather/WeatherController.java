@@ -11,35 +11,35 @@ public class WeatherController {
 
     private final WeatherService weatherService;
 
-    @GetMapping("/{city}")
-    public Weather getWeatherForCity(@PathVariable String city) {
-        return weatherService.getWeatherForCity(city);
+    @GetMapping("/{cityName}")
+    public Weather getWeatherForCity(@PathVariable String cityName) {
+        return weatherService.getWeatherForCity(cityName);
     }
 
-    @GetMapping("/average/{country}")
-    public double getAverageCountryTemperature(@PathVariable String country) {
-        return weatherService.getAverageCountryTemperature(country);
+    @GetMapping("/average/{countryName}")
+    public double getAverageCountryTemperature(@PathVariable String countryName) {
+        return weatherService.getAverageCountryTemperature(countryName);
     }
 
-    @PostMapping("/{city}")
-    public Weather postWeatherForCity(@PathVariable String city) {
-        return weatherService.postWeatherForCity(city);
+    @PostMapping("/{cityName}")
+    public Weather postWeatherForCity(@PathVariable String cityName) {
+        return weatherService.postWeatherForCity(cityName);
     }
 
-    @PutMapping("/{city}")
-    public Weather updateWeatherForCity(@PathVariable String city) {
-        return weatherService.updateWeatherForCity(city);
+    @PutMapping("/{cityName}")
+    public Weather updateWeatherForCity(@PathVariable String cityName) {
+        return weatherService.updateWeatherForCity(cityName);
     }
 
-    @PutMapping("/country/{country}")
-    public HttpStatus updateWeatherForCountry(@PathVariable String country) {
-        weatherService.updateWeatherForCountry(country);
+    @PutMapping("/country/{countryName}")
+    public HttpStatus updateWeatherForCountry(@PathVariable String countryName) {
+        weatherService.updateWeatherForCountry(countryName);
         return HttpStatus.OK;
     }
 
-    @DeleteMapping("/delete/{city}")
-    public HttpStatus deleteWeatherForCity(@PathVariable String city) {
-        weatherService.deleteWeatherForCity(city);
+    @DeleteMapping("/delete/{cityName}")
+    public HttpStatus deleteWeatherForCity(@PathVariable String cityName) {
+        weatherService.deleteWeatherForCity(cityName);
         return HttpStatus.OK;
     }
 

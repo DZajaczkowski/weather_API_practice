@@ -10,4 +10,5 @@ public class WeatherAlreadyExistsException extends RuntimeException {
     public WeatherAlreadyExistsException() {
         super();
     }
+
 }

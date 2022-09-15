@@ -10,4 +10,5 @@ public class WeatherNotFoundException extends RuntimeException {
     public WeatherNotFoundException() {
         super();
     }
+
 }
