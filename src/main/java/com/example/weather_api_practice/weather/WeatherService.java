@@ -63,9 +63,9 @@ public class WeatherService {
 
     public Weather updateWeatherForCity(String c) {
         c = c.toLowerCase(Locale.ROOT);
-        City city = cityService.postCity(c);
+        City city = cityService.getCity(c);
         if(!weatherRepository.existsWeatherByCity_Name(c))
-            throw new WeatherNotFoundException();
+            postWeatherForCity(c);
         Weather weather = weatherRepository.getWeatherByCity(city);
         weather = setUpdatedValues(city, weather);
         return weatherRepository.save(weather);

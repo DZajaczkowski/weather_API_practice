@@ -22,8 +22,8 @@ public class CityController {
     }
 
     @PostMapping("/save/{city}")
-    public City postCity(@PathVariable String city) {
-        return cityService.postCity(city);
+    public City createCity(@PathVariable String city) {
+        return cityService.createCity(city);
     }
 
     @DeleteMapping("/delete/{city}")

@@ -24,7 +24,7 @@ public class CityService {
         else throw new CityNotFoundException();
     }
 
-    public City postCity(String c) {
+    public City createCity(String c) {
         c = c.toLowerCase(Locale.ROOT);
         if(cityRepository.existsCityByName(c))
             throw new CityAlreadyExistsException();

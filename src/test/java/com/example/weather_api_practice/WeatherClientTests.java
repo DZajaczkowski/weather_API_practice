@@ -19,28 +19,35 @@ public class WeatherClientTests {
     CityService cityService;
 
     @Test
-    void shouldGetCoordinatesData() {
-        var weatherCoordinates = weatherClient.getCityData("Warsaw");
-        Assertions.assertNotNull(weatherCoordinates);
+    void shouldGetCityData() {
+        var cityResponse = weatherClient.getCityData("Warsaw");
+        Assertions.assertNotNull(cityResponse);
+    }
+
+    @Test
+    void getCityDataShouldReturnBody() {
+        var cityResponse = weatherClient.getCityData("Warsaw");
+        var cityResponseBody = cityResponse.getBody();
+        assert cityResponseBody != null;
     }
 
     @Test
     void shouldGetWeatherData() {
-        var weatherResponse = weatherClient.getWeatherData(cityService.postCity("Warsaw"));
+        var weatherResponse = weatherClient.getWeatherData(cityService.getCity("Warsaw"));
         var responseStatus = weatherResponse.getStatusCode();
         Assertions.assertTrue(responseStatus.is2xxSuccessful());
     }
 
     @Test
     void getWeatherDataShouldReturnBody() {
-        var weatherResponse = weatherClient.getWeatherData(cityService.postCity("Warsaw"));
+        var weatherResponse = weatherClient.getWeatherData(cityService.getCity("Warsaw"));
         var weatherResponseBody = weatherResponse.getBody();
         assert weatherResponseBody != null;
     }
 
     @Test
     void getWeatherDataBodyShouldContainWarsawId() {
-        var weatherResponse = weatherClient.getWeatherData(cityService.postCity("Warsaw"));
+        var weatherResponse = weatherClient.getWeatherData(cityService.getCity("Warsaw"));
         var weatherResponseBody = weatherResponse.getBody();
         assert weatherResponseBody != null;
         Assertions.assertEquals(756135, weatherResponseBody.id);
