@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Locale;
 import java.util.UUID;
 
 @Getter
@@ -26,7 +27,7 @@ public class City {
     private String country;
 
     public City(CityData cityData) {
-        this.name = cityData.name;
+        this.name = cityData.name.toLowerCase(Locale.ROOT);
         this.lon = cityData.lon;
         this.lat = cityData.lat;
         this.country = cityData.country;

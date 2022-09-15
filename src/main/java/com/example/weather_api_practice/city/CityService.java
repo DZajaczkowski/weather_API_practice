@@ -1,10 +1,13 @@
 package com.example.weather_api_practice.city;
 
+import com.example.weather_api_practice.exceptions.CityAlreadyExistsException;
+import com.example.weather_api_practice.exceptions.CityNotFoundException;
 import com.example.weather_api_practice.weather.WeatherClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 
 @RequiredArgsConstructor
 @Service
@@ -15,19 +18,19 @@ public class CityService {
 
 
     public City getCity(String c) {
-        String cityInput = c.substring(0,1).toUpperCase() + c.substring(1);
-        if(cityRepository.existsCityByName(cityInput))
-            return cityRepository.getCityByName(cityInput);
-        else throw new RuntimeException();
+        c = c.toLowerCase(Locale.ROOT);
+        if(cityRepository.existsCityByName(c))
+            return cityRepository.getCityByName(c);
+        else throw new CityNotFoundException();
     }
 
     public City postCity(String c) {
-        String cityInput = c.substring(0,1).toUpperCase() + c.substring(1);
-        if(cityRepository.existsCityByName(cityInput))
-            return cityRepository.getCityByName(cityInput);
+        c = c.toLowerCase(Locale.ROOT);
+        if(cityRepository.existsCityByName(c))
+            throw new CityAlreadyExistsException();
         var cityDataArray = weatherClient.getCityData(c).getBody();
         if (cityDataArray == null)
-            throw new RuntimeException();
+            throw new CityNotFoundException();
         var city = convertCityDataToCity(cityDataArray[0]);
         return cityRepository.save(city);
     }

@@ -13,4 +13,6 @@ public interface WeatherRepository extends JpaRepository<Weather, Integer> {
     Weather getWeatherByCity(City city);
     Weather getWeatherByCity_Name(String city);
     boolean existsWeatherByCity(City city);
+    boolean existsWeatherByCity_Name(String city);
+    boolean existsWeatherByCity_Country(String country);
 }
