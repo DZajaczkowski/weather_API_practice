@@ -2,6 +2,7 @@ package com.example.weather_api_practice.weather;
 
 import com.example.weather_api_practice.city.City;
 import com.example.weather_api_practice.weather.data.WeatherData;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import javax.persistence.OneToOne;
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Weather {
 
     @Id

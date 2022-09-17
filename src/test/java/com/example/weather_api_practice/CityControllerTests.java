@@ -1,37 +1,72 @@
 package com.example.weather_api_practice;
 
-import com.example.weather_api_practice.city.CityService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.weather_api_practice.city.City;
+import com.example.weather_api_practice.city.CityRepository;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
+import java.util.UUID;
+
+import static io.restassured.RestAssured.given;
+import static org.mockito.Mockito.when;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class CityControllerTests {
 
-    @Autowired
-    CityService cityService;
+    @MockBean
+    private static CityRepository cityRepository;
 
-    @Test
-    void shouldGetCity() {
-        cityService.getCity("warsaw");
+    @Before
+    public void setUp() {
+        City cityWarsaw =
+                new City(new UUID(231, 324), "warsaw", 21.0067, 52.232, "PL");
+
+        when(cityRepository.existsCityByName(cityWarsaw.getName()))
+                .thenReturn(true);
+
+        when(cityRepository.getCityByName(cityWarsaw.getName()))
+                .thenReturn(cityWarsaw);
     }
 
     @Test
-    void shouldCountCitiesByCountry() {
-        cityService.countByCountry("pl");
+    public void shouldGetCity() {
+        given()
+                .when()
+                .get("/city/warsaw")
+                .then()
+                .statusCode(200);
     }
 
     @Test
-    void shouldCreateCity() {
-        cityService.createCity("london");
+    public void shouldCountCitiesByCountry() {
+        given()
+                .when()
+                .get("/city/count/pl")
+                .then()
+                .statusCode(200);
     }
 
     @Test
-    void shouldDeleteCity() {
-        cityService.deleteCity("london");
+    public void shouldCreateCity() {
+        given()
+                .when()
+                .post("/city/save/katowice")
+                .then()
+                .statusCode(201);
+    }
+
+    @Test
+    public void shouldDeleteCity() {
+        given()
+                .when()
+                .delete("/city/delete/warsaw")
+                .then()
+                .statusCode(200);
     }
 
 

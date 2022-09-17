@@ -28,7 +28,7 @@ public class WeatherClientTests {
     void getCityDataShouldReturnBody() {
         var cityResponse = weatherClient.getCityData("Warsaw");
         var cityResponseBody = cityResponse.getBody();
-        assert cityResponseBody != null;
+        Assertions.assertNotNull(cityResponseBody);
     }
 
     @Test
@@ -42,14 +42,14 @@ public class WeatherClientTests {
     void getWeatherDataShouldReturnBody() {
         var weatherResponse = weatherClient.getWeatherData(cityService.getCity("Warsaw"));
         var weatherResponseBody = weatherResponse.getBody();
-        assert weatherResponseBody != null;
+        Assertions.assertNotNull(weatherResponseBody);
     }
 
     @Test
     void getWeatherDataBodyShouldContainWarsawId() {
         var weatherResponse = weatherClient.getWeatherData(cityService.getCity("Warsaw"));
         var weatherResponseBody = weatherResponse.getBody();
-        assert weatherResponseBody != null;
+        Assertions.assertNotNull(weatherResponseBody);
         Assertions.assertEquals(756135, weatherResponseBody.id);
     }
 

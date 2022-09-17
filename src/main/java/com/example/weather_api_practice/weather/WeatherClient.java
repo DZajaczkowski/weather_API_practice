@@ -17,15 +17,17 @@ public class WeatherClient {
     private final RestTemplate restTemplate;
 
     public ResponseEntity<CityData[]> getCityData(String cityName) {
+        String key = "55832a1dadee8a9132e71d5acf5821a7";
         String currentCoordinates
-                = "https://api.openweathermap.org/geo/1.0/direct?q={city}&limit=1&appid=55832a1dadee8a9132e71d5acf5821a7";
-        return restTemplate.getForEntity(currentCoordinates, CityData[].class, cityName);
+                = "https://api.openweathermap.org/geo/1.0/direct?q={city}&limit=1&appid={key}";
+        return restTemplate.getForEntity(currentCoordinates, CityData[].class, cityName, key);
     }
 
     public ResponseEntity<WeatherData> getWeatherData(City city) {
+        String key = "55832a1dadee8a9132e71d5acf5821a7";
         String currentWeather
-                = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid=55832a1dadee8a9132e71d5acf5821a7";
-        return restTemplate.getForEntity(currentWeather, WeatherData.class, city.getLat(), city.getLon());
+                = "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&units=metric&appid={key}";
+        return restTemplate.getForEntity(currentWeather, WeatherData.class, city.getLat(), city.getLon(), key);
     }
 
 }

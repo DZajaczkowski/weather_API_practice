@@ -9,6 +9,7 @@ import com.example.weather_api_practice.weather.data.WeatherData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,9 +23,9 @@ public class WeatherService {
 
     public Weather getWeatherForCity(String cityName) {
         cityName = cityName.toLowerCase(Locale.ROOT);
-        if (!weatherRepository.existsWeatherByCity_Name(cityName))
-            throw new WeatherNotFoundException();
-        return weatherRepository.getWeatherByCity_Name(cityName);
+        if (weatherRepository.existsWeatherByCity_Name(cityName))
+            return weatherRepository.getWeatherByCity_Name(cityName);
+        throw new WeatherNotFoundException();
     }
 
     public Weather postWeatherForCity(String cityName) {
@@ -39,7 +40,6 @@ public class WeatherService {
 
     public double getAverageCountryTemperature(String countryName) {
         double average = 0;
-        updateWeatherForCountry(countryName.toUpperCase());
 
         List<Weather> weathers = weatherRepository.getWeathersByCity_Country(countryName.toUpperCase());
         if (weathers.size() == 0)
@@ -51,24 +51,30 @@ public class WeatherService {
         return average / weathers.size();
     }
 
-    public void updateWeatherForCountry(String countryName) {
+    public List<Weather> updateWeatherForCountry(String countryName) {
         countryName = countryName.toUpperCase();
-        if (!weatherRepository.existsWeatherByCity_Country(countryName))
+        if (weatherRepository.existsWeatherByCity_Country(countryName)) {
+            List<City> cities = cityService.getCitiesByCountry(countryName);
+            List<Weather> weathers = new ArrayList<>();
+            for (City city : cities) {
+                weathers.add(updateWeatherForCity(city.getName()));
+            }
+            return weathers;
+        } else {
             throw new CountryNotFoundException();
-        List<City> cities = cityService.getCitiesByCountry(countryName);
-        for (City city : cities) {
-            updateWeatherForCity(city.getName());
         }
     }
 
     public Weather updateWeatherForCity(String cityName) {
         cityName = cityName.toLowerCase(Locale.ROOT);
-        City city = cityService.getCity(cityName);
-        if (!weatherRepository.existsWeatherByCity_Name(cityName))
-            postWeatherForCity(cityName);
-        Weather weather = weatherRepository.getWeatherByCity(city);
-        weather = setUpdatedValues(city, weather);
-        return weatherRepository.save(weather);
+        if (weatherRepository.existsWeatherByCity_Name(cityName)) {
+            City city = cityService.getCity(cityName);
+            Weather weather = weatherRepository.getWeatherByCity_Name(cityName);
+            weather = setUpdatedValues(city, weather);
+            return weatherRepository.save(weather);
+        } else {
+            return postWeatherForCity(cityName);
+        }
     }
 
     public void deleteWeatherForCity(String cityName) {
