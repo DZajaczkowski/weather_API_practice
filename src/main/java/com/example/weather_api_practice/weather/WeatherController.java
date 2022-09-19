@@ -45,7 +45,7 @@ public class WeatherController {
         return weatherService.updateWeatherForCountry(countryName);
     }
 
-    @DeleteMapping("/delete/{cityName}")
+    @DeleteMapping("/{cityName}/delete")
     @ResponseStatus(OK)
     public Weather deleteWeatherForCity(@PathVariable String cityName) {
         Weather weather = weatherService.getWeatherForCity(cityName);

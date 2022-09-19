@@ -35,7 +35,8 @@ public class WeatherService {
         City city = cityService.getCity(cityName);
         var weatherResponseBody = weatherClient.getWeatherData(city);
         var weather = convertWeatherDataToWeather(weatherResponseBody.getBody(), city);
-        return weatherRepository.save(weather);
+        weatherRepository.save(weather);
+        return weather;
     }
 
     public double getAverageCountryTemperature(String countryName) {
@@ -71,7 +72,8 @@ public class WeatherService {
             City city = cityService.getCity(cityName);
             Weather weather = weatherRepository.getWeatherByCity_Name(cityName);
             weather = setUpdatedValues(city, weather);
-            return weatherRepository.save(weather);
+            weatherRepository.save(weather);
+            return weather;
         } else {
             return postWeatherForCity(cityName);
         }

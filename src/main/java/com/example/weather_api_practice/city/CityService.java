@@ -32,7 +32,8 @@ public class CityService {
         if (cityDataArray == null)
             throw new CityNotFoundException();
         var city = convertCityDataToCity(cityDataArray[0]);
-        return cityRepository.save(city);
+        cityRepository.save(city);
+        return city;
     }
 
     public int countByCountry(String countryName) {

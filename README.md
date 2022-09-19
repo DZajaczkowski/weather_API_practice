@@ -1,16 +1,21 @@
 # Weather_API
 
+## How to run it?
+
+* Get docker desktop.
+* Run the docker-compose file.
+
 ## Why it was created?
 
 * To practice consuming data from outside API.
-* To practice relational database more.
-* To practice Spring REST more.
+* To practice relational database.
+* To further practice Spring Boot.
 * To practice Mockito and RestAssured.
-* To practice creation of Dockerfile.
+* To practice creation of Dockerfile and docker-compose.
 
 ## Is the project finished?
 
-* For the most part it is finished. There might be some improvements added later, but probably nothing major.
+* For the most part it is finished, but there might be some small improvements added later on.
 
 ## What does it do?
 

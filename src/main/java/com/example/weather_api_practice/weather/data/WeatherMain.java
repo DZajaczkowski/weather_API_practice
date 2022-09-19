@@ -10,4 +10,5 @@ public class WeatherMain {
     public int pressure;
 
     public int humidity;
+
 }

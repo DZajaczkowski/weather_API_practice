@@ -4,6 +4,7 @@ import com.example.weather_api_practice.city.City;
 import com.example.weather_api_practice.city.CityRepository;
 import com.example.weather_api_practice.weather.Weather;
 import com.example.weather_api_practice.weather.WeatherRepository;
+import io.restassured.config.RestAssuredConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,10 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.config.JsonConfig.jsonConfig;
+import static io.restassured.path.json.config.JsonPathConfig.NumberReturnType.DOUBLE;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.isA;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -51,10 +56,19 @@ public class WeatherControllerTests {
     @Test
     public void getWeatherForCityShouldGetResponseOK() {
         given()
+                .config(RestAssuredConfig.config().jsonConfig(jsonConfig().numberReturnType(DOUBLE)))
                 .when()
                 .get("/weather/warsaw")
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body("id", equalTo(756135),
+                        "city.name", equalTo("warsaw"),
+                        "city.country", equalTo("PL"),
+                        "lon", equalTo(21.0067),
+                        "lat", equalTo(52.232),
+                        "temp", equalTo(14.02),
+                        "pressure", equalTo(1001),
+                        "humidity", equalTo(80));
     }
 
     @Test
@@ -76,19 +90,37 @@ public class WeatherControllerTests {
                 .thenReturn(cityKatowice);
 
         given()
+                .config(RestAssuredConfig.config().jsonConfig(jsonConfig().numberReturnType(DOUBLE)))
                 .when()
                 .post("/weather/katowice")
                 .then()
-                .statusCode(201);
+                .statusCode(201)
+                .body("id", isA(Integer.class),
+                "city.name", equalTo("katowice"),
+                "city.country", equalTo("PL"),
+                "lon", isA(Double.class),
+                "lat", isA(Double.class),
+                "temp", isA(Double.class),
+                "pressure", isA(Integer.class),
+                "humidity", isA(Integer.class));
     }
 
     @Test
     public void shouldUpdateWeatherForCity() {
         given()
+                .config(RestAssuredConfig.config().jsonConfig(jsonConfig().numberReturnType(DOUBLE)))
                 .when()
                 .put("/weather/warsaw")
                 .then()
-                .statusCode(201);
+                .statusCode(201)
+                .body("id", equalTo(756135),
+                        "city.name", equalTo("warsaw"),
+                        "city.country", equalTo("PL"),
+                        "lon", isA(Double.class),
+                        "lat", isA(Double.class),
+                        "temp", isA(Double.class),
+                        "pressure", isA(Integer.class),
+                        "humidity", isA(Integer.class));
     }
 
     @Test
@@ -103,10 +135,19 @@ public class WeatherControllerTests {
     @Test
     public void shouldDeleteWeatherForCity() {
         given()
+                .config(RestAssuredConfig.config().jsonConfig(jsonConfig().numberReturnType(DOUBLE)))
                 .when()
-                .delete("/weather/delete/warsaw")
+                .delete("/weather/warsaw/delete")
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body("id", equalTo(756135),
+                        "city.name", equalTo("warsaw"),
+                        "city.country", equalTo("PL"),
+                        "lon", equalTo(21.0067),
+                        "lat", equalTo(52.232),
+                        "temp", equalTo(14.02),
+                        "pressure", equalTo(1001),
+                        "humidity", equalTo(80));
     }
 
 }

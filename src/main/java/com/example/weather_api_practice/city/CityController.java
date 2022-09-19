@@ -25,13 +25,13 @@ public class CityController {
         return cityService.countByCountry(countryName);
     }
 
-    @PostMapping("/save/{cityName}")
+    @PostMapping("/{cityName}")
     @ResponseStatus(CREATED)
     public City createCity(@PathVariable String cityName) {
         return cityService.createCity(cityName);
     }
 
-    @DeleteMapping("/delete/{cityName}")
+    @DeleteMapping("/{cityName}/delete")
     @ResponseStatus(OK)
     public City deleteCity(@PathVariable String cityName) {
         var city = getCity(cityName);

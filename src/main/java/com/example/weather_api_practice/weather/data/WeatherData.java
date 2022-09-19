@@ -9,10 +9,8 @@ import lombok.Setter;
 @Setter
 public class WeatherData {
 
-
     public int id;
     public WeatherCoordinates coord;
     public WeatherMain main;
-
 
 }
