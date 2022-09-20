@@ -1,9 +1,9 @@
 # Weather_API
 
-## How to run it?
+## How to run the application?
 
 * Get docker desktop on your machine.
-* To run the application run `docker-compose up` from project root.
+* Run `docker-compose up` from project root.
 
 ## Why it was created?
 
