@@ -2,7 +2,7 @@
 
 ## How to run it?
 
-* Get docker desktop.
+* Get docker desktop on your machine.
 * To run the application run `docker-compose up` from project root.
 
 ## Why it was created?
