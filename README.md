@@ -3,7 +3,7 @@
 ## How to run it?
 
 * Get docker desktop.
-* Run the docker-compose file.
+* To run the application run `docker-compose up` from project root.
 
 ## Why it was created?
 
