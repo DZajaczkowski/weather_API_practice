@@ -4,6 +4,7 @@ import com.example.weather_api_practice.city.City;
 import com.example.weather_api_practice.city.CityRepository;
 import com.example.weather_api_practice.weather.Weather;
 import com.example.weather_api_practice.weather.WeatherRepository;
+import io.restassured.RestAssured;
 import io.restassured.config.RestAssuredConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -23,9 +25,11 @@ import static org.hamcrest.Matchers.isA;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class WeatherControllerTests {
 
+    @LocalServerPort
+    private int port;
     @MockBean
     private static WeatherRepository weatherRepository;
     @MockBean
@@ -33,6 +37,7 @@ public class WeatherControllerTests {
 
     @Before
     public void setUp() {
+        RestAssured.port = port;
         City cityWarsaw =
                 new City(new UUID(231, 324), "warsaw", 21.0067, 52.232, "PL");
         Weather weatherWarsaw =

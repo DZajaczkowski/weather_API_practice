@@ -33,22 +33,46 @@ public class WeatherClientTests {
 
     @Test
     void shouldGetWeatherData() {
-        var weatherResponse = weatherClient.getWeatherData(cityService.getCity("Warsaw"));
+        var cityDataArray = weatherClient.getCityData("Warsaw").getBody();
+
+        Assertions.assertNotNull(cityDataArray);
+        Assertions.assertTrue(cityDataArray.length > 0);
+
+        var city = cityService.convertCityDataToCity(cityDataArray[0]);
+
+        var weatherResponse = weatherClient.getWeatherData(city);
         var responseStatus = weatherResponse.getStatusCode();
+
         Assertions.assertTrue(responseStatus.is2xxSuccessful());
     }
 
     @Test
     void getWeatherDataShouldReturnBody() {
-        var weatherResponse = weatherClient.getWeatherData(cityService.getCity("Warsaw"));
+        var cityDataArray = weatherClient.getCityData("Warsaw").getBody();
+
+        Assertions.assertNotNull(cityDataArray);
+        Assertions.assertTrue(cityDataArray.length > 0);
+
+        var city = cityService.convertCityDataToCity(cityDataArray[0]);
+
+        var weatherResponse = weatherClient.getWeatherData(city);
         var weatherResponseBody = weatherResponse.getBody();
+
         Assertions.assertNotNull(weatherResponseBody);
     }
 
     @Test
     void getWeatherDataBodyShouldContainWarsawId() {
-        var weatherResponse = weatherClient.getWeatherData(cityService.getCity("Warsaw"));
+        var cityDataArray = weatherClient.getCityData("Warsaw").getBody();
+
+        Assertions.assertNotNull(cityDataArray);
+        Assertions.assertTrue(cityDataArray.length > 0);
+
+        var city = cityService.convertCityDataToCity(cityDataArray[0]);
+
+        var weatherResponse = weatherClient.getWeatherData(city);
         var weatherResponseBody = weatherResponse.getBody();
+
         Assertions.assertNotNull(weatherResponseBody);
         Assertions.assertEquals(756135, weatherResponseBody.id);
     }
