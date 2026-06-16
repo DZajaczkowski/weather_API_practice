@@ -11,6 +11,7 @@ The application stores city data using OpenWeatherMap API and allows basic CRUD 
 
 ### Requirements
 
+* Java 17
 * Docker Desktop
 * OpenWeatherMap API key (You can generate a free API key at OpenWeatherMap.)
 
@@ -38,6 +39,8 @@ http://localhost:8080
 
 
 ## Running Tests
+
+Docker must be running because integration tests use Testcontainers.
 
 Run tests from IntelliJ IDEA or with Maven:
 
@@ -76,4 +79,4 @@ Run tests from IntelliJ IDEA or with Maven:
 
 
 ## More projects:
-* [Github Repositories](https://github.com/DZajaczkowski?tab=repositories)
+* [View More Projects](https://github.com/DZajaczkowski?tab=repositories)
