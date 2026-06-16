@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class WeatherControllerTests {
+public class WeatherControllerTest {
 
     @LocalServerPort
     private int port;

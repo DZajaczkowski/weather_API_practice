@@ -3,19 +3,23 @@
 ## About
 
 Spring Boot REST API project created for learning purposes.
-
 The application stores city data using OpenWeatherMap API and allows basic CRUD operations on cities and weather records stored in a PostgreSQL database.
 
+## What was practiced?
 
-## How to run the application?
+* Consuming data from external APIs
+* Working with a relational database
+* Spring Boot development
+* Testing with Mockito and RestAssured
+* Creating Dockerfiles and Docker Compose configurations
 
-### Requirements
+## Requirements
 
-* Java 17
+* Java 17 with JAVA_HOME configured
 * Docker Desktop
 * OpenWeatherMap API key (You can generate a free API key at OpenWeatherMap.)
 
-### Environment Variables
+## Environment Variables
 
 Set the following environment variable before starting the application:
 
@@ -23,7 +27,7 @@ Set the following environment variable before starting the application:
 WEATHER_API_KEY=<your_openweathermap_api_key>
 ```
 
-### Run
+## Running Application
 
 From the project root:
 
@@ -37,34 +41,22 @@ The application will be available at:
 http://localhost:8080
 ```
 
-
 ## Running Tests
 
 Docker must be running because integration tests use Testcontainers.
-
+Remember to set the WEATHER_API_KEY variable before starting the tests.
 Run tests from IntelliJ IDEA or with Maven:
 
 ```bash
 ./mvnw test
 ```
 
+## Features
 
-## Why it was created?
-
-* To practice consuming data from external APIs.
-* To practice working with a relational database.
-* To further practice Spring Boot.
-* To practice Mockito and RestAssured.
-* To practice creating Dockerfiles and Docker Compose configurations.
-
-
-## What does it do?
-
-* Retrieves city data from OpenWeatherMap.
-* Retrieves weather information for stored cities.
-* Calculates average temperature for a selected country.
-* Supports CRUD operations for City and Weather entities.
-
+* Integration with OpenWeatherMap API
+* Weather data storage in PostgreSQL
+* Average temperature calculation by country
+* CRUD operations for City and Weather entities
 
 ## Technologies
 
@@ -77,6 +69,6 @@ Run tests from IntelliJ IDEA or with Maven:
 * RestAssured
 * Maven
 
+## Other Projects
 
-## More projects:
 * [View More Projects](https://github.com/DZajaczkowski?tab=repositories)
